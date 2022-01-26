@@ -84,7 +84,7 @@ export function escapeHtmlChars(text: string): string {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/\u200B/g, "&ZeroWidthSpace;")
-        .replace(/'/g, "&apos;");
+        .replace(/'/g, "&#39;");
 }
 
 /**

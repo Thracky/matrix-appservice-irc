@@ -227,7 +227,7 @@ export class BridgedClient extends EventEmitter {
             if (ipv6Prefix) {
                 // side-effects setting the IPv6 address on the client config
                 await this.ipv6Generator.generate(
-                    ipv6Prefix, this.clientConfig
+                    ipv6Prefix, this.clientConfig, this.server,
                 );
             }
             this.log.info(
@@ -250,7 +250,9 @@ export class BridgedClient extends EventEmitter {
                     this.server.getIpv6Prefix() ? this.clientConfig.getIpv6Address() : undefined
                 ),
                 encodingFallback: this.encodingFallback,
-            }, (inst: ConnectionInstance) => {
+            },
+            this.server.homeserverDomain,
+            (inst: ConnectionInstance) => {
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 this.onConnectionCreated(inst, nameInfo, identResolver!);
             });
